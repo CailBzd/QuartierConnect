@@ -20,3 +20,6 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+viviLink-api/node_modules/.bin
+ViviLink/assets
+viviLink-api/node_modules
