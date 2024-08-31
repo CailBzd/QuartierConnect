@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI CD ANDROID
 
 # Controls when the workflow will run
 on:
@@ -39,10 +39,10 @@ jobs:
           npm install -g expo-cli
           npm install -g eas-cli
 
-          - name: Build Android with EAS
-          env:
-            EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-          run: eas build --platform android --non-interactive --profile production
+      - name: Build Android with EAS
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: eas build --platform android --non-interactive --profile production
     
       - name: Upload AAB
         uses: actions/upload-artifact@v2
