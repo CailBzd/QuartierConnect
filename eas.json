@@ -5,14 +5,20 @@
           "EXPO_PUBLIC_API_URL": "https://api.production.com",
           "APP_ICON": "./assets/icon-test.png",
           "APP_NAME": "My App (Test)"
-        }
+        },
+        "android": {
+            "buildType": "app-bundle"
+          }
       },
       "test": {
         "env": {
           "EXPO_PUBLIC_API_URL": "https://api.test.com",
           "APP_ICON": "./assets/icon-test.png",
           "APP_NAME": "My App (Test)"
-        }
+        },
+        "android": {
+            "buildType": "app-bundle"
+          }
       }
     }
   }
