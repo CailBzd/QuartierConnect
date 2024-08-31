@@ -34,23 +34,18 @@ jobs:
         run: npm install
 
      # Install Expo CLI globally
-      - name: Install Expo CLI
-        run: npm install -g expo-cli
+      - name: Install Expo CLI and EAS CLI
+        run: | 
+          npm install -g expo-cli
+          npm install -g eas-cli
 
-     # Log in to Expo
-      - name: Log in to Expo
-        env:
-         EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: |
-         expo login --token $EXPO_TOKEN
-
-     # Build Android APK/AAB
-      - name: Build Android
-        run: expo build:android --no-wait
-
-     # Upload APK or AAB as an artifact
-      - name: Upload APK or AAB
+          - name: Build Android with EAS
+          env:
+            EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          run: eas build --platform android --non-interactive --profile production
+    
+      - name: Upload AAB
         uses: actions/upload-artifact@v2
         with:
-         name: expo-build
-         path: dist/*.apk # Change to dist/*.aab if using AAB
+          name: app-release.aab
+          path: android/app/build/outputs/bundle/release/app-release.aab
