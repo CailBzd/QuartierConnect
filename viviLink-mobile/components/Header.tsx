@@ -26,7 +26,10 @@ const Header = () => {
       <Menu
         visible={visible}
         onDismiss={closeMenu}
-        anchor={<Button onPress={openMenu}>{t('language')}</Button>}>
+        anchor={ <Appbar.Action
+          icon={() => <FontAwesome name="globe" size={24} color="black" />}
+          onPress={openMenu}
+        />}>
         <Menu.Item 
           onPress={() => changeLanguage('en')} 
           title="English"
