@@ -35,6 +35,7 @@
     "experiments": {
       "typedRoutes": true
     },
+    "owner": "cayzhed",
     "extra": {
       "router": {
         "origin": false
@@ -42,7 +43,6 @@
       "eas": {
         "projectId": "03884a41-47c3-498a-88f9-7747818f587f"
       }
-    },
-    "owner": "cayzhed"
+    }
   }
 }
