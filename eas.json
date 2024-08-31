@@ -7,8 +7,10 @@
           "APP_NAME": "My App (Test)"
         },
         "android": {
-            "buildType": "app-bundle"
-          }
+            "buildType": "app-bundle",
+            "serviceAccountKeyPath": "./path-to-your-service-account.json",
+            "track": "alpha"
+        }
       },
       "test": {
         "env": {
@@ -17,7 +19,9 @@
           "APP_NAME": "My App (Test)"
         },
         "android": {
-            "buildType": "app-bundle"
+            "buildType": "app-bundle",
+            "serviceAccountKeyPath": "./path-to-your-service-account.json",
+            "track": "internal"  
           }
       }
     }
