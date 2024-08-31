@@ -23,12 +23,34 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+       # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+         node-version: '14'
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+     # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+     # Install Expo CLI globally
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
+
+     # Log in to Expo
+      - name: Log in to Expo
+        env:
+         EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+         expo login --token $EXPO_TOKEN
+
+     # Build Android APK/AAB
+      - name: Build Android
+        run: expo build:android --no-wait
+
+     # Upload APK or AAB as an artifact
+      - name: Upload APK or AAB
+        uses: actions/upload-artifact@v2
+        with:
+         name: expo-build
+         path: dist/*.apk # Change to dist/*.aab if using AAB
