@@ -1,82 +1,56 @@
-import React, { useEffect, useState }  from "react";
-import { View, StyleSheet } from "react-native";
-import { Text, Button, Card, Title, Paragraph } from "react-native-paper";
-import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import Header from '@/components/Header';
 
-export default function Index() {
-  const { t } = useTranslation();
-  const [organizations, setOrganizations] = useState([]);
+export default function SplashScreen() {
+  const [loading, setLoading] = useState(true);
+  const [, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    // Faire une requête à l'API pour récupérer le nom de l'organisation
-    // axios.get('http://192.168.192.1:7788/organizations')
-    axios.get('http://192.168.1.59:7788/organizations')
-      .then(response => {
-        console.log(response);
-        setOrganizations(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching organization name:', error);
-      });
-  }, []);
+    const checkAuth = async () => {
 
-  return (
-    <View style={styles.container}>
-      <Card style={styles.card}>
-        <Card.Content>
-          <Title style={styles.title}>{t('welcome')}</Title>
-          <Paragraph style={styles.tagline}>
-            {t('tagline')}
-          </Paragraph>
-          <Button mode="contained" onPress={() => alert('Get Started')} style={styles.button}>
-            {t('get_started')}
-          </Button>
-        </Card.Content>
-      </Card>
-      
-      {organizations.map(org => (
-        <Text key={org.id} style={styles.organizationName}>
-          {org.name}
-        </Text>
-         ))}
-    </View>
-  );
+      // Attendre 2 secondes avant de vérifier le token
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      try {
+        const token = await AsyncStorage.getItem('bearerToken');
+        if (token) {
+          // Si un token est trouvé, rediriger vers la page account
+          router.replace('/account');
+        } else {
+          // Si aucun token n'est trouvé, rediriger vers la page welcome
+          router.replace('/welcome');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la vérification du token', error);
+        router.replace('/welcome');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
+  // Affichage du splashscreen pendant la vérification
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  return null; // Le splashscreen disparaît après la redirection
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    backgroundColor: "#ffffff",
-  },
-  card: {
-    width: '100%',
-    maxWidth: 500,
-    elevation: 4,
-    borderRadius: 8,
-    padding: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#333",
-    textAlign: "center",
-    marginBottom: 10,
-  },
-  organizationName: {
-    fontSize: 18,
-    marginVertical: 5,
-  },
-  tagline: {
-    fontSize: 16,
-    color: "#666",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  button: {
-    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

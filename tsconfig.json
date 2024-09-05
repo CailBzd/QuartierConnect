@@ -1,5 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
+  "esModuleInterop": true,  // Ajoutez cette ligne
   "compilerOptions": {
     "strict": true,
     "paths": {
