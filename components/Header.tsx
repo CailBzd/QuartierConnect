@@ -6,9 +6,11 @@ import i18n from '../i18n';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuth } from '../contexts/AuthContext';  
 
-const Header = ({userType}: {userType: string}) => {
+const Header = () => {
   const { t } = useTranslation();
+  const { userType, setUserType } = useAuth(); 
   const [visible, setVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -17,13 +19,15 @@ const Header = ({userType}: {userType: string}) => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (userType === "authenticated") {
-        const storedName = await AsyncStorage.getItem('name');  // Récupérer le nom de l'utilisateur
-        setUserName(storedName);
+      const storedName = await AsyncStorage.getItem('userName');
+      if (storedName) {
+        setUserType('authenticated');  // Définir l'utilisateur comme authentifié
+      } else {
+        setUserType('guest');
       }
     };
     fetchUserData();
-  }, [userType]);
+  }, [setUserType]);
 
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
@@ -49,13 +53,14 @@ const Header = ({userType}: {userType: string}) => {
     await AsyncStorage.removeItem('bearerToken');
 
     setDialogVisible(false);
-    navigation.navigate('login');
+    userType == "guest"
+    navigation.navigate('welcome');
   ;}  
 
   return (
     <>
       <Appbar.Header style={styles.header}>
-        <Appbar.Content title="ViviLink" />
+        <Appbar.Content title={t('title')} />
         {userType === "authenticated" ? (
           // Si l'utilisateur est connecté, afficher l'avatar
           <Menu

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "vivilink-434221",
+  "private_key_id": "1824901f577ca63066f095eb1b267be362bc99e9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCjq3i5n/3FM5Rr\nEVKEfWejI9UyfrwUu4Weysf6CM+OQKUvvs6gnXzFFHf/Bg0YvalEHQWwjVmPDv0N\nG4PyEFm4pTOla++eEzIhuJPku+namk2coEXtl4KUzm9r5NtOUV4jlTlPBKiY1Z3m\nbstEfhJBZ8D7Um+F5SDZtnWSPXstGHHZPDgP31qrpSeJQQASTDcXRs+iTqHA9yzc\n9CjbULaAc67heTqYfCk4O0rlrQkG5ul8iYyCXxRJwjKR3IMLigVP/Afl2yxKg3S9\nKy+aj6qW45pfSqBd+kPVzuQtj2k2dWxqtHQIaTlLmYisKb3DQKBtz3+6qT1l5VZq\nJcGPK9CrAgMBAAECggEABR0E0wvQElqnruamJNSEKeEjNoYmGyG2rXzZXZLr5R5Y\n6tJzwynYbZHTo+iM/TJjuOiNNnRcEW+e8UtkRmpDW1Tx9Z+XJ2GjJdGN8U37ouRC\nO3v4Y1Fh94MxkPXf8iTxo3v0g+b523iFC993Q0cLC/cRXOi46j571cFxD+YS1JhL\nkS9PMSvaquUdKK4j8YFo5h9X0F1a2mOx8S4bCygIPzNXpQBxqwZmjnYPO9Njp5SW\nBUDdvV2eh8icN0Z1jCzhzRzI30/ZY0/z1lzeFaNROMlWGwwz4EVp8lU2HG/3P1Bf\naCUW1IyFj2wtdnp4F5YTO+WxSrKtqSnWjqWVoS3OSQKBgQDhGCw/W9EYga5zHyoJ\ngLhDSo1GDsBVxrdKPa7uop6feDae7bjEKFZjU8Xx7K8O4xEhfTV3xqyAt0ioYBSo\nvnSNucOclaHwDPhXyqoCnHa8XTkjlain1YEmHgmTWbvZ9ucdsVC3GP7j/Lmm9u68\nVknSGAP8jjLP/bxAfTwP2FA1gwKBgQC6JEogRyX4zWfpxAMBXZVm8uQuRzQfX6Su\nT/6+qJaoaeBPHLAv/Lxcsk6ATx9s2/mXAWfWMF5honYJ/W76asmTmCXKoxdTudf8\n9mrdSPDAM3g3GV0WqzICTimo5JIlP/p+a88Eb3cSnH0fNBUczOdzIPqQEMWm4NCp\nVpvD/5I3uQKBgDdPoU/QWAkVlLBlMAc1whGG+EAGz+xD8DYmAh5Rh3jYKVPURlqt\nLs0pgLJ53mpiEYuRINpVz32xjAET2v+8DRfmVdLcUfaSuVOZUT1jBSo0Hh5IYDEd\nnaaoKuIyYp6ktRXuxE65raiIKXaFpxRQf8NIc3JT3tiNGP0fyOp71PnRAoGAWNt7\n+z6blNLRORmV6a/34wYuAR2CdzucDI4paHBoQwsPxhRG0xGOBZ4ktUGQGdJEql5E\naE38sBTyzkAKG0ag5XErETmbqB8+SQaE6w+nxciMKZlVA75DiDAx2OsMDPYmqPTk\nBRUEvYCwhhXBwlbaYe4rTlyDTe9iDIRIpV66ORkCgYEA2qWS+aBmKvh4/2SlKZdL\nt2qsJ/WS+KoRIjZJBmrBTORm9fHS1v6gy3JtZ7NMio1mnGZzmVGrm83bqHAi1szY\nSTotik7iRbodUUimSXHzrTsx1cg8z0GHPyegLuJKIXtYdGMER6IIhEY18aBRPl46\njh+4FJK4zwFqwX+KcyhNG5E=\n-----END PRIVATE KEY-----\n",
+  "client_email": "production@vivilink-434221.iam.gserviceaccount.com",
+  "client_id": "111032935429029085733",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/production%40vivilink-434221.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

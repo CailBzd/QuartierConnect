@@ -8,6 +8,7 @@ import i18n from '../i18n';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useTheme } from "react-native-paper";
+import { AuthProvider } from "../contexts/AuthContext"; 
 
 export default function RootLayout() {
   const theme = useTheme();  
@@ -18,7 +19,7 @@ export default function RootLayout() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = await AsyncStorage.getItem('token'); // Récupérer le token s'il existe
+        const token = await AsyncStorage.getItem('bearerToken'); // Récupérer le token s'il existe
         setIsAuthenticated(!token); // Si le token existe, l'utilisateur est authentifié
       } catch (error) {
         console.error('Erreur lors de la vérification du token', error);
@@ -39,20 +40,22 @@ export default function RootLayout() {
     );
   }
   return (
-    <I18nextProvider i18n={i18n}>
-      <PaperProvider theme={theme}>
-        <View style={styles.container}>
-            {/* Afficher un en-tête différent selon l'authentification */}
-            <Header userType={isAuthenticated ? "authenticated" : "guest"} />
-            
-            <View style={styles.content}>
-              <Stack screenOptions={{ headerShown: false }}>
-              </Stack>
+    <AuthProvider>
+      <I18nextProvider i18n={i18n}>
+        <PaperProvider theme={theme}>
+          <View style={styles.container}>
+              {/* Afficher un en-tête différent selon l'authentification */}
+              <Header userType={isAuthenticated ? "authenticated" : "guest"} />
+              
+              <View style={styles.content}>
+                <Stack screenOptions={{ headerShown: false }}>
+                </Stack>
+            </View>
+            <Footer />
           </View>
-          <Footer />
-        </View>
-      </PaperProvider>
-    </I18nextProvider>
+        </PaperProvider>
+      </I18nextProvider>
+    </AuthProvider>
   );
 }
 
