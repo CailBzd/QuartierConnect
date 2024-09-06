@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Image } from "react-native";
-import { Appbar, Menu, Button } from "react-native-paper";
+import { StyleSheet, Image, View } from "react-native";
+import { Appbar, Menu, Button, Portal, Dialog } from "react-native-paper";
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -10,6 +10,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Header = ({userType}: {userType: string}) => {
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState(false);
   const [userName, setUserName] = useState<string | null>(null); 
   const navigation = useNavigation();  // Utilisation de la navigation
 
@@ -26,61 +28,113 @@ const Header = ({userType}: {userType: string}) => {
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
+  const openAvatarMenu = () => setMenuVisible(true);
+  const closeAvatarMenu = () => setMenuVisible(false);
+
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
     closeMenu();
   };
 
+  // Confirmation de déconnexion
+  const showLogoutConfirmation = () => {
+    closeAvatarMenu();
+    setDialogVisible(true);
+  };
+
+  // Gestion de la déconnexion
+  const handleLogout = async () => {
+    // On supprime le storage
+    await AsyncStorage.removeItem('userName');
+    await AsyncStorage.removeItem('bearerToken');
+
+    setDialogVisible(false);
+    navigation.navigate('login');
+  ;}  
+
   return (
-    <Appbar.Header style={styles.header}>
-      <Appbar.Content title="ViviLink" />
-      {userType === "authenticated" ? (
-        // Si l'utilisateur est connecté, afficher l'avatar
-        <Appbar.Action 
-        icon={() => (
-          <Image
-            source={require('../assets/avatar.png')}  // Image d'avatar (remplacez par le chemin de votre avatar)
-            style={styles.avatar}
+    <>
+      <Appbar.Header style={styles.header}>
+        <Appbar.Content title="ViviLink" />
+        {userType === "authenticated" ? (
+          // Si l'utilisateur est connecté, afficher l'avatar
+          <Menu
+          visible={menuVisible}
+          onDismiss={closeAvatarMenu}
+          anchor={
+            <Appbar.Action
+              icon={() => (
+                <Image
+                  source={require('../assets/avatar.png')}
+                  style={styles.avatar}
+                />
+              )}
+              onPress={openAvatarMenu}
+            />
+          }
+        >
+          <Menu.Item
+            onPress={() => navigation.navigate('account')}
+            title="Mon compte"
+            icon="account"
           />
+          <Menu.Item
+            onPress={showLogoutConfirmation}
+            title="Déconnexion"
+            icon="logout"
+          />
+        </Menu>
+        ) : (
+          <>
+          {/* Bouton de connexion, redirige vers la page login */}
+        <Appbar.Action 
+          icon="login" 
+          onPress={() => navigation.navigate('login')}  // Redirige vers la page de connexion
+        />
+        {/* Bouton d'inscription, redirige vers la page register */}
+        <Appbar.Action 
+          icon="account-plus" 
+          onPress={() => navigation.navigate('register')}  // Redirige vers la page d'enregistrement
+        />
+        
+        {/* Menu de langue */}
+        <Menu
+          visible={visible}
+          onDismiss={closeMenu}
+          anchor={ <Appbar.Action
+            icon={() => <FontAwesome name="globe" size={24} color="black" />}
+            onPress={openMenu}
+          />}>
+          <Menu.Item 
+            onPress={() => changeLanguage('en')} 
+            title="English"
+            icon={() => <FontAwesome name="flag" size={24} color="black" style={styles.icon} />} 
+          />
+          <Menu.Item 
+            onPress={() => changeLanguage('fr')} 
+            title="Français"
+            icon={() => <FontAwesome name="flag" size={24} color="blue" style={styles.icon} />} 
+          />
+          {/* Ajoutez d'autres langues ici */}
+        </Menu>
+        </>
         )}
-        onPress={() => navigation.navigate('account')}  // Redirige vers la page de compte
-        />
-      ) : (
-        <>
-        {/* Bouton de connexion, redirige vers la page login */}
-      <Appbar.Action 
-        icon="login" 
-        onPress={() => navigation.navigate('login')}  // Redirige vers la page de connexion
-      />
-      {/* Bouton d'inscription, redirige vers la page register */}
-      <Appbar.Action 
-        icon="account-plus" 
-        onPress={() => navigation.navigate('register')}  // Redirige vers la page d'enregistrement
-      />
-      
-      {/* Menu de langue */}
-      <Menu
-        visible={visible}
-        onDismiss={closeMenu}
-        anchor={ <Appbar.Action
-          icon={() => <FontAwesome name="globe" size={24} color="black" />}
-          onPress={openMenu}
-        />}>
-        <Menu.Item 
-          onPress={() => changeLanguage('en')} 
-          title="English"
-          icon={() => <FontAwesome name="flag" size={24} color="black" style={styles.icon} />} 
-        />
-        <Menu.Item 
-          onPress={() => changeLanguage('fr')} 
-          title="Français"
-          icon={() => <FontAwesome name="flag" size={24} color="blue" style={styles.icon} />} 
-        />
-        {/* Ajoutez d'autres langues ici */}
-      </Menu>
+      </Appbar.Header>
+
+
+        {/* Boîte de dialogue de confirmation */}
+        <Portal>
+          <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
+            <Dialog.Title>{t('logout.confirmTitle')}</Dialog.Title>
+            <Dialog.Content>
+              <View>
+                <Button onPress={handleLogout}>{t('logout.confirmButton')}</Button>
+                <Button onPress={() => setDialogVisible(false)}>{t('logout.cancelButton')}</Button>
+              </View>
+            </Dialog.Content>
+          </Dialog>
+        </Portal>
       </>
-      )}
-    </Appbar.Header>
   );
 };
 

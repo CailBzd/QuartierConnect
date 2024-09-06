@@ -29,6 +29,15 @@
       "no_organizations": "No organizations found.",
       "fetch_error": "Error fetching organizations.",
       "token_not_found": "Token not found."
+    },
+    "menu": {
+      "account": "My Account",
+      "logout": "Logout"
+    },
+    "logout": {
+      "confirmTitle": "Logout Confirmation",
+      "confirmButton": "Yes, Logout",
+      "cancelButton": "Cancel"
     }
   }
   

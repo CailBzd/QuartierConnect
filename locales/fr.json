@@ -29,6 +29,15 @@
       "no_organizations": "Aucune organisation trouvée.",
       "fetch_error": "Erreur lors de la récupération des organisations.",
       "token_not_found": "Token non trouvé."
+    },
+    "menu": {
+      "account": "Mon compte",
+      "logout": "Déconnexion"
+    },
+    "logout": {
+      "confirmTitle": "Confirmation de déconnexion",
+      "confirmButton": "Oui, déconnecter",
+      "cancelButton": "Annuler"
     }
   }
   
