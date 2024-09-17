@@ -53,4 +53,4 @@ jobs:
       - name: Submit to Google Play
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas submit --platform android --non-interactive --profile test
+        run: eas submit --platform android --non-interactive --profile test --path android/app/build/outputs/bundle/release/app-release.aab
