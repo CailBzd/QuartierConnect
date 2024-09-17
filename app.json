@@ -2,7 +2,7 @@
   "expo": {
     "name": "viviLink-mobile",
     "slug": "viviLink-mobile",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -34,13 +34,10 @@
       "expo-font"
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": false
     },
     "owner": "cayzhed",
     "extra": {
-      "router": {
-        "origin": false
-      },
       "eas": {
         "projectId": "03884a41-47c3-498a-88f9-7747818f587f"
       }

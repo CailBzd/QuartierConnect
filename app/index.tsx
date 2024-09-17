@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-import Header from '@/components/Header';
 
 export default function SplashScreen() {
   const [loading, setLoading] = useState(true);
-  const [, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
