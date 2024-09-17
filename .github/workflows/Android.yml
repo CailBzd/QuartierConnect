@@ -45,7 +45,7 @@ jobs:
         run: eas build --platform android --non-interactive --profile test
     
       - name: Upload AAB
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: app-release.aab
           path: android/app/build/outputs/bundle/release/app-release.aab
