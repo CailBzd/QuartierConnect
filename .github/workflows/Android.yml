@@ -46,7 +46,7 @@ jobs:
     
       - name: Download build artifact
         run: |
-          eas build:download --platform android --path app-release.aab
+          eas artifacts:download --platform android --path app-release.aab
 
       - name: Submit to Google Play
         env:
