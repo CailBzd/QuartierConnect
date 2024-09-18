@@ -47,16 +47,16 @@ jobs:
       - name: Get build details via API
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}  # Assurez-vous que cette variable est correctement définie
         run: |
-          echo "Fetching the latest build information..."
-          eas build:list --platform android --status finished --limit 1 --json --non-interactive
-          BUILD_ID=$(eas build:list --platform android --status finished --limit 1 --json --non-interactive | jq -r '.[0].id')
-          echo "Build ID: $BUILD_ID"
-          BUILD_URL="https://api.expo.dev/v2/projects/$EAS_PROJECT_ID/builds/$BUILD_ID/artifacts"
-          echo "Build URL: $BUILD_URL"
-          ARTIFACT_URL=$(curl -H "Authorization: Bearer $EXPO_TOKEN" $BUILD_URL | jq -r '.artifacts[0].url')
-          echo "Artifact URL: $ARTIFACT_URL"
-          curl -o app-release.aab $ARTIFACT_URL
+            echo "Fetching the latest build information..."
+            BUILD_ID=$(eas build:list --platform android --status finished --limit 1 --json --non-interactive | jq -r '.[0].id')
+            echo "Build ID: $BUILD_ID"
+            BUILD_URL="https://api.expo.dev/v2/projects/$EAS_PROJECT_ID/builds/$BUILD_ID/artifacts"
+            echo "Build URL: $BUILD_URL"
+            ARTIFACT_URL=$(curl -H "Authorization: Bearer $EXPO_TOKEN" $BUILD_URL | jq -r '.buildUrl')
+            echo "Artifact URL: $ARTIFACT_URL"
+            curl -o app-release.aab $ARTIFACT_URL
 
       - name: Upload AAB to artifact
         uses: actions/upload-artifact@v3
