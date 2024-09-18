@@ -44,12 +44,19 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: eas build --platform android --non-interactive --profile test
     
-      - name: Download build artifact
+      - name: Get build status and download artifact
         run: |
-          eas artifacts:download --platform android --path app-release.aab
+          BUILD_URL=$(eas build:status --platform android --json | jq -r '.artifacts.buildUrl')
+          curl -o app-release.aab $BUILD_URL
+
+      - name: Upload AAB to artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.aab
+          path: app-release.aab
 
       - name: Submit to Google Play
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           EXPO_GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-        run: eas submit --platform android --non-interactive --profile test --path android/app/build/outputs/bundle/release/app-release.aab --track interna
+        run: eas submit --platform android --non-interactive --profile test --path app-release.aab --track internal
