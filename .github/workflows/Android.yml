@@ -44,10 +44,15 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: eas build --platform android --non-interactive --profile test
     
-      - name: Get build status and download artifact
+      - name: Get build details via API
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |
-          BUILD_URL=$(eas build:status --platform android --json | jq -r '.artifacts.buildUrl')
-          curl -o app-release.aab $BUILD_URL
+          BUILD_ID=$(eas build:list --platform android --status finished --limit 1 --json | jq -r '.[0].id')
+          BUILD_URL="https://api.expo.dev/v2/projects/$EAS_PROJECT_ID/builds/$BUILD_ID/artifacts"
+          ARTIFACT_URL=$(curl -H "Authorization: Bearer $EXPO_TOKEN" $BUILD_URL | jq -r '.artifacts[0].url')
+          echo "Artifact URL: $ARTIFACT_URL"
+          curl -o app-release.aab $ARTIFACT_URL
 
       - name: Upload AAB to artifact
         uses: actions/upload-artifact@v3
