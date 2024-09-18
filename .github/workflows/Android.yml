@@ -49,8 +49,8 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |
           echo "Fetching the latest build information..."
-          eas build:list --platform android --status finished --limit 1 --json
-          BUILD_ID=$(eas build:list --platform android --status finished --limit 1 --json | jq -r '.[0].id')
+          eas build:list --platform android --status finished --limit 1 --json --non-interactive
+          BUILD_ID=$(eas build:list --platform android --status finished --limit 1 --json --non-interactive | jq -r '.[0].id')
           echo "Build ID: $BUILD_ID"
           BUILD_URL="https://api.expo.dev/v2/projects/$EAS_PROJECT_ID/builds/$BUILD_ID/artifacts"
           echo "Build URL: $BUILD_URL"
