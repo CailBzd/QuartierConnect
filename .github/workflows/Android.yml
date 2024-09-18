@@ -42,10 +42,14 @@ jobs:
       - name: Build Android with EAS
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build --platform android --non-interactive --profile test  --wait
+        run: eas build --platform android --non-interactive --profile test
     
+      - name: Download build artifact
+        run: |
+          eas artifacts:download --platform android --path app-release.aab
+
       - name: Submit to Google Play
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           EXPO_GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-        run: eas submit --platform android --non-interactive --profile test --latest
+        run: eas submit --platform android --non-interactive --profile test --path android/app/build/outputs/bundle/release/app-release.aab --track interna
