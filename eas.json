@@ -1,39 +1,42 @@
-{
-    "build": {
-      "production": {
-        "env": {
-          "EXPO_PUBLIC_API_URL": "https://api.production.com",
-          "APP_ICON": "./assets/icon-test.png",
-          "APP_NAME": "Vivilink"
-        },
-        "android": {
-            "buildType": "app-bundle"
-        }
+{      
+  "cli": {
+    "version": ">= 3.13.0"
+  },
+  "build": {
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://api.production.com",
+        "APP_ICON": "./assets/icon-test.png",
+        "APP_NAME": "Vivilink"
       },
-      "test": {
-        "env": {
-          "EXPO_PUBLIC_API_URL": "https://api.test.com",
-          "APP_ICON": "./assets/icon-test.png",
-          "APP_NAME": "Vivilink"
-        },
-        "android": {
-            "buildType": "app-bundle"
-          }
+      "android": {
+          "buildType": "app-bundle"
       }
     },
-    "submit": {
-      "production": {
-        "android": {
-          "serviceAccountKeyPath": "./assets/vivilink-prod.json",
-          "track": "alpha"
-        }
+    "test": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://api.test.com",
+        "APP_ICON": "./assets/icon-test.png",
+        "APP_NAME": "Vivilink"
       },
-      "test": {
-        "android": {
-          "serviceAccountKeyPath": "./assets/vivilink-prod.json",
-          "track": "internal"
+      "android": {
+          "buildType": "app-bundle"
         }
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./assets/vivilink-prod.json",
+        "track": "alpha"
+      }
+    },
+    "test": {
+      "android": {
+        "serviceAccountKeyPath": "./assets/vivilink-prod.json",
+        "track": "internal"
       }
     }
   }
+}
   
