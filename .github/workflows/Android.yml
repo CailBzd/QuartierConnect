@@ -49,14 +49,39 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}  # Assurez-vous que cette variable est correctement définie
         run: |
-            echo "Fetching the latest build information..."
-            BUILD_ID=$(eas build:list --platform android --status finished --limit 1 --json --non-interactive | jq -r '.[0].id')
-            echo "Build ID: $BUILD_ID"
-            BUILD_URL="https://api.expo.dev/v2/projects/$EAS_PROJECT_ID/builds/$BUILD_ID/artifacts"
-            echo "Build URL: $BUILD_URL"
-            ARTIFACT_URL=$(curl -H "Authorization: Bearer $EXPO_TOKEN" $BUILD_URL | jq -r '.buildUrl')
-            echo "Artifact URL: $ARTIFACT_URL"
-            curl -o app-release.aab $ARTIFACT_URL
+          echo "Fetching the latest build information..."
+          BUILD_ID=$(eas build:list --platform android --status finished --limit 1 --json --non-interactive | jq -r '.[0].id')
+          echo "Build ID: $BUILD_ID"
+    
+          echo "EAS_PROJECT_ID: $EAS_PROJECT_ID"
+          if [ -z "$EAS_PROJECT_ID" ]; then
+            echo "Erreur : EAS_PROJECT_ID n'est pas défini."
+            exit 1
+          fi
+    
+          BUILD_URL="https://api.expo.dev/v2/projects/$EAS_PROJECT_ID/builds/$BUILD_ID/artifacts"
+          echo "Build URL: $BUILD_URL"
+    
+          echo "Fetching artifacts..."
+          HTTP_STATUS=$(curl -s -o artifacts.json -w "%{http_code}" -H "Authorization: Bearer $EXPO_TOKEN" $BUILD_URL)
+    
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "Échec de la récupération des artefacts. Code HTTP : $HTTP_STATUS"
+            cat artifacts.json
+            exit 1
+          fi
+    
+          ARTIFACT_URL=$(jq -r '.artifacts.buildUrl' artifacts.json)
+          echo "Artifact URL: $ARTIFACT_URL"
+    
+          if [ "$ARTIFACT_URL" = "null" ]; then
+            echo "Erreur : URL de l'artefact non trouvée dans la réponse."
+            cat artifacts.json
+            exit 1
+          fi
+    
+          echo "Downloading the build artifact..."
+          curl -o app-release.aab $ARTIFACT_URL
 
       - name: Upload AAB to artifact
         uses: actions/upload-artifact@v3
