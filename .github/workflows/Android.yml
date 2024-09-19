@@ -22,8 +22,14 @@ jobs:
 
       - name: Install Expo CLI and EAS CLI
         run: |
-          npm install -g expo-cli
-          npm install -g eas-cli
+          npm install -g expo-cli@latest
+          npm install -g eas-cli@latest
+          
+      - name: Check EAS CLI version
+        run: eas --version
+
+      - name: Add npm global bin to PATH
+        run: echo "$(npm bin -g)" >> $GITHUB_PATH
 
       - name: Build Android with EAS
         env:
