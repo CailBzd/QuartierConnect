@@ -34,7 +34,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: npx eas build --platform android --non-interactive --profile test
+        run: npx eas build --platform android --non-interactive --profile test --wait
 
       - name: Download the latest Android build
         if: github.ref == 'refs/heads/main'
