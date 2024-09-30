@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "viviLink-mobile",
+    "slug": "viviLink-mobile",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "bundleIdentifier": "com.pitousoftware.vivilink",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.pitousoftware.vivilink",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-localization",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": false
+    },
+    "owner": "cayzhed",
+    "extra": {
+      "eas": {
+        "projectId": "03884a41-47c3-498a-88f9-7747818f587f"
+      }
+    }
+  }
+}

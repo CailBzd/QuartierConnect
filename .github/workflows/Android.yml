@@ -1,0 +1,57 @@
+name: CI CD ANDROID
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - develop
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurer Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Vérifier la version de EAS CLI
+        run: npx eas --version
+
+      # Condition pour la branche master uniquement
+      - name: Build Android with EAS
+        if: github.ref == 'refs/heads/master'
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: npx eas build --platform android --non-interactive --profile test
+
+      - name: Download the latest Android build
+        if: github.ref == 'refs/heads/master'
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: npx eas build:download --platform android --path app-release.aab
+
+      - name: Upload AAB to artifact
+        if: github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.aab
+          path: app-release.aab
+
+      - name: Submit to Google Play
+        if: github.ref == 'refs/heads/master'
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          EXPO_GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+        run: npx eas submit --platform android --non-interactive --profile test --path app-release.aab --track internal

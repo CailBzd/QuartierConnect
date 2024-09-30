@@ -1,0 +1,45 @@
+{
+    "title": "ViviLink",
+    "welcome": "Bienvenue sur ViviLink",
+    "tagline": "Connectez et gérez votre quartier en toute simplicité.",
+    "description" : "ViviLink est une plateforme innovante qui permet aux utilisateurs de se connecter facilement avec leurs organisations. Elle offre des fonctionnalités de gestion d'informations sécurisées et intuitives, tout en garantissant une communication fluide avec vos partenaires. Simplifiez la gestion de vos données et assurez-vous que tout reste organisé et accessible où que vous soyez.",
+    "get_started": "Commencer",
+    "copyright": "© 2024 par Pitou. Tous droits réservés.",
+    "login": {
+      "title": "Connexion",
+      "email": "Email",
+      "password": "Mot de passe",
+      "button": "Se connecter",
+      "no_account": "Pas de compte ? Inscrivez-vous",
+      "success": "Connexion réussie",
+      "error": "Erreur de connexion"
+    },
+    "register": {
+      "title": "Inscription",
+      "name": "Nom",
+      "email": "Email",
+      "password": "Mot de passe",
+      "button": "S'inscrire",
+      "already_have_account": "Déjà un compte ? Connectez-vous",
+      "success": "Inscription réussie",
+      "error": "Erreur lors de l'inscription"
+    },
+    "account": {
+      "welcome" :"Bienvenue sur votre compte",
+      "loading": "Chargement...",
+      "organizations": "Organisations",
+      "no_organizations": "Aucune organisation trouvée.",
+      "fetch_error": "Erreur lors de la récupération des organisations.",
+      "token_not_found": "Token non trouvé."
+    },
+    "menu": {
+      "account": "Mon compte",
+      "logout": "Déconnexion"
+    },
+    "logout": {
+      "confirmTitle": "Confirmation de déconnexion",
+      "confirmButton": "Oui, déconnecter",
+      "cancelButton": "Annuler"
+    }
+  }
+  

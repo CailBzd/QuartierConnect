@@ -1,0 +1,44 @@
+{
+    "title": "ViviLink",
+    "welcome": "Welcome to ViviLink",
+    "tagline": "Connect and manage your neighborhood effortlessly.",
+    "get_started": "Get Started",
+    "copyright": "© 2024 by Pitou. All rights reserved.",
+    "login": {
+      "title": "Connexion",
+      "email": "Email",
+      "password": "Mot de passe",
+      "button": "Se connecter",
+      "no_account": "Pas de compte ? Inscrivez-vous",
+      "success": "Connexion réussie",
+      "error": "Erreur de connexion"
+    },
+    "register": {
+      "title": "Inscription",
+      "name": "Nom",
+      "email": "Email",
+      "password": "Mot de passe",
+      "button": "S'inscrire",
+      "already_have_account": "Déjà un compte ? Connectez-vous",
+      "success": "Inscription réussie",
+      "error": "Erreur lors de l'inscription"
+    },
+    "account": {
+      "welcome" : "Bienvenue sur votre compte",
+      "loading": "Loading...",
+      "organizations": "Organizations",
+      "no_organizations": "No organizations found.",
+      "fetch_error": "Error fetching organizations.",
+      "token_not_found": "Token not found."
+    },
+    "menu": {
+      "account": "My Account",
+      "logout": "Logout"
+    },
+    "logout": {
+      "confirmTitle": "Logout Confirmation",
+      "confirmButton": "Yes, Logout",
+      "cancelButton": "Cancel"
+    }
+  }
+  
