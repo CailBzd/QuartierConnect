@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - develop
-      - master
+      - main
   pull_request:
     branches:
       - develop
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -29,28 +29,28 @@ jobs:
       - name: Vérifier la version de EAS CLI
         run: npx eas --version
 
-      # Condition pour la branche master uniquement
+      # Condition pour la branche main uniquement
       - name: Build Android with EAS
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: npx eas build --platform android --non-interactive --profile test
 
       - name: Download the latest Android build
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: npx eas build:download --platform android --path app-release.aab
 
       - name: Upload AAB to artifact
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v3
         with:
           name: app-release.aab
           path: app-release.aab
 
       - name: Submit to Google Play
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           EXPO_GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
