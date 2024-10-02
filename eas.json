@@ -4,7 +4,8 @@
       "env": {
         "EXPO_PUBLIC_API_URL": "https://api.production.com",
         "APP_ICON": "./assets/icon-test.png",
-        "APP_NAME": "Vivilink"
+        "APP_NAME": "Vivilink",        
+        "VERSION_CODE": "2"
       },
       "android": {
           "buildType": "app-bundle"
@@ -14,7 +15,8 @@
       "env": {
         "EXPO_PUBLIC_API_URL": "https://api.test.com",
         "APP_ICON": "./assets/icon-test.png",
-        "APP_NAME": "Vivilink"
+        "APP_NAME": "Vivilink",
+        "VERSION_CODE": "2"
       },
       "android": {
           "buildType": "app-bundle"
