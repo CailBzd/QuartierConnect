@@ -18,7 +18,7 @@
     },
     "android": {
       "package": "com.pitousoftware.vivilink",
-      "versionCode": 2,
+      "versionCode": "${EAS_BUILD_NUMBER}",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
