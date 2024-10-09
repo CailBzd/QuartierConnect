@@ -36,12 +36,17 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: npx eas build --platform android --non-interactive --profile test --wait
 
+      - name: Get the build ID
+        if: github.ref == 'refs/heads/main'
+        run: |
+          BUILD_ID=$(npx eas build:list --platform android --status finished --limit 1 --json | jq -r '.[0].id')
+          echo "BUILD_ID=${BUILD_ID}" >> $GITHUB_ENV
+
       - name: Download the latest Android build
         if: github.ref == 'refs/heads/main'
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: npx eas build download --platform android --path app-release.aab
-
+        run: |
+          curl -o app-release.aab "https://api.expo.dev/v2/projects/${{ secrets.EAS_PROJECT_ID }}/builds/${BUILD_ID}/artifacts/app-release.aab"
+          
       - name: Upload AAB to artifact
         if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v3
