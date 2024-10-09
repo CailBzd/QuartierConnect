@@ -1,4 +1,7 @@
 {      
+  "cli": {
+    "version": ">=12.5.1"
+  },  
   "build": {
     "production": {
       "env": {
