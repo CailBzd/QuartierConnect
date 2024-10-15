@@ -80,12 +80,12 @@ const Header = () => {
           }
         >
           <Menu.Item
-            onPress={() => navigation.navigate('account')}
+            // onPress={() => navigation.navigate('account')}
             title="Mon compte"
             icon="account"
           />
           <Menu.Item
-            onPress={showLogoutConfirmation}
+            // onPress={showLogoutConfirmation}
             title="Déconnexion"
             icon="logout"
           />
@@ -95,12 +95,12 @@ const Header = () => {
           {/* Bouton de connexion, redirige vers la page login */}
         <Appbar.Action 
           icon="login" 
-          onPress={() => navigation.navigate('login')}  // Redirige vers la page de connexion
+          // onPress={() => navigation.navigate('login')}  // Redirige vers la page de connexion
         />
         {/* Bouton d'inscription, redirige vers la page register */}
         <Appbar.Action 
           icon="account-plus" 
-          onPress={() => navigation.navigate('register')}  // Redirige vers la page d'enregistrement
+          // onPress={() => navigation.navigate('register')}  // Redirige vers la page d'enregistrement
         />
         
         {/* Menu de langue */}
