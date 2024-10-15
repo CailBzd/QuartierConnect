@@ -8,7 +8,7 @@
         "EXPO_PUBLIC_API_URL": "https://api.production.com",
         "APP_ICON": "./assets/icon-test.png",
         "APP_NAME": "Vivilink",        
-        "VERSION_CODE": "3"
+        "VERSION_CODE": "4"
       },
       "android": {
         "buildType": "app-bundle",        

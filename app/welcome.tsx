@@ -47,9 +47,9 @@ export default function WelcomeScreen() {
           </Paragraph>
           <Button 
             mode="contained" 
-            onPress={() => router.push('/login')} 
+            // onPress={() => router.push('/login')} 
             style={styles.button}>
-            {t('get_started')}
+            {t('incoming')}
           </Button>
         </Card.Content>
       </Card>
