@@ -1,24 +1,42 @@
-import React from "react";
-import { View, StyleSheet, Image, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Image, ScrollView, TouchableOpacity  } from "react-native";
 import { Button, Card, Title, Paragraph } from "react-native-paper";
 import { useTranslation } from 'react-i18next';
 import { images } from '../assets/images';
 import { useRouter } from 'expo-router';
+import SnakeGame from "../components/snakeGame";
+
+
 
 export default function WelcomeScreen() {
   const { t } = useTranslation();
   const router = useRouter(); 
+  const [showSnake, setShowSnake] = useState(false);
+  const [tapCount, setTapCount] = useState(0);
+
+    // Gérer les taps sur la bannière pour déclencher l'easter egg
+    const handleBannerTap = () => {
+      const newTapCount = tapCount + 1;
+      setTapCount(newTapCount);
+      if (newTapCount === 5) { // Affiche le jeu Snake après 5 taps
+        setShowSnake(true);
+      }
+    };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* Bannière principale */}
-      <View style={styles.bannerContainer}>
-        <Image 
+      <TouchableOpacity onPress={handleBannerTap} style={styles.bannerContainer}>
+        <Image  
           source={images.banner} // Remplacez par votre image de bannière
           style={styles.bannerImage}
         />
         <Title style={styles.bannerTitle}>{t('welcome')}</Title>
-      </View>
+      </TouchableOpacity >
+
+   {/* Afficher le jeu Snake si activé */}
+   {showSnake && <SnakeGame />}
+
 
       {/* Section principale */}
       <Card style={styles.card}>
