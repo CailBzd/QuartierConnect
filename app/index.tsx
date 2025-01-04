@@ -9,21 +9,21 @@ export default function SplashScreen() {
 
   useEffect(() => {
     const checkAuth = async () => {
-
-      // Attendre 2 secondes avant de vérifier le token
+      // Attendre un court délai (1 seconde ici) pour simuler le chargement
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       try {
         const token = await AsyncStorage.getItem('bearerToken');
         if (token) {
-          // Si un token est trouvé, rediriger vers la page account
+          // Si le token est trouvé, rediriger vers la page "account"
           router.replace('/account');
         } else {
-          // Si aucun token n'est trouvé, rediriger vers la page welcome
+          // Sinon, rediriger vers la page "welcome"
           router.replace('/welcome');
         }
       } catch (error) {
         console.error('Erreur lors de la vérification du token', error);
+        // En cas d'erreur, rediriger vers la page "welcome"
         router.replace('/welcome');
       } finally {
         setLoading(false);
@@ -33,7 +33,7 @@ export default function SplashScreen() {
     checkAuth();
   }, [router]);
 
-  // Affichage du splashscreen pendant la vérification
+  // Affichage d'un écran de chargement (SplashScreen) pendant la vérification
   if (loading) {
     return (
       <View style={styles.container}>
@@ -42,7 +42,8 @@ export default function SplashScreen() {
     );
   }
 
-  return null; // Le splashscreen disparaît après la redirection
+  // Retourne null une fois que la redirection est effectuée
+  return null;
 }
 
 const styles = StyleSheet.create({

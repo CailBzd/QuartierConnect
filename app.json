@@ -14,7 +14,8 @@
     },
     "ios": {
       "bundleIdentifier": "com.pitousoftware.vivilink",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "newArchEnabled": true
     },
     "android": {
       "package": "com.pitousoftware.vivilink",
@@ -22,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "newArchEnabled": true
     },
     "web": {
       "bundler": "metro",
